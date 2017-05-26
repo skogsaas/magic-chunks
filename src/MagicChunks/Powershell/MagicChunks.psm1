@@ -20,7 +20,7 @@
     PROCESS {
         Add-Type -Path "$PSScriptRoot\MagicChunks.dll"
 
-        Write-Host "Transforming file $($path)"
+        Write-Output "Transforming file $($path)"
 
         try {
             $transforms = New-Object -TypeName MagicChunks.Core.TransformationCollection `
@@ -31,7 +31,7 @@
 
             [MagicChunks.TransformTask]::Transform($type, $path, ($target, $path)[[string]::IsNullOrWhiteSpace($target)], $transforms)
 
-            Write-Host "File transformed to $(($target, $path)[[string]::IsNullOrWhiteSpace($target)])"
+            Write-Output "File transformed to $(($target, $path)[[string]::IsNullOrWhiteSpace($target)])"
         }
         catch {
             Write-Error -Message "File transformation error: $($_.Exception.Message)" -Exception $_.Exception
